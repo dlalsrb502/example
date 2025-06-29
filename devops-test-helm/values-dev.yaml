@@ -1,0 +1,25 @@
+namespace: devops
+
+image:
+  repository: 192.168.1.63/devops_test/devops_test
+  tag: v1.0
+  pullPolicy: IfNotPresent
+
+env:
+  environment: development
+  db:
+    user: dev_user
+    password: dev_password
+    host: dev-db.host.local
+    port: 5432
+    name: dev_db
+
+ingress:
+  enabled: true
+  className: nginx
+  hosts:
+    - host: devops_test.autoever.dev
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []

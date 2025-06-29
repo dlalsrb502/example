@@ -2,14 +2,11 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ include "devops-test-helm.fullname" . }}
-  labels:
-    {{- include "devops-test-helm.labels" . | nindent 4 }}
+  namespace: {{ .Values.namespace }}
 spec:
-  type: {{ .Values.service.type }}
-  ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
-      protocol: TCP
-      name: http
+  type: ClusterIP
   selector:
-    {{- include "devops-test-helm.selectorLabels" . | nindent 4 }}
+    app: {{ include "devops-test-helm.name" . }}
+  ports:
+    - port: 3000
+      targetPort: 3000
