@@ -4,8 +4,6 @@ kind: Ingress
 metadata:
   name: {{ include "devops-test-helm.fullname" . }}
   namespace: {{ .Values.namespace }}
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: {{ .Values.ingress.className }}
   rules:
@@ -20,7 +18,7 @@ spec:
               service:
                 name: {{ include "devops-test-helm.fullname" $ }}
                 port:
-                  number: 8000
+                  number: 80
           {{- end }}
     {{- end }}
   {{- end }}

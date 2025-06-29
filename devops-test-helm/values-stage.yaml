@@ -18,7 +18,7 @@ ingress:
   enabled: true
   className: nginx
   hosts:
-    - host: devops_test.autoever.test
+    - host: devops-test.autoever.test
       paths:
         - path: /
           pathType: Prefix

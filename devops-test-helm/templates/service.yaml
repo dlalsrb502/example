@@ -3,10 +3,13 @@ kind: Service
 metadata:
   name: {{ include "devops-test-helm.fullname" . }}
   namespace: {{ .Values.namespace }}
+  labels:
+    env: {{ .Values.env.environment }}
 spec:
   type: ClusterIP
   selector:
     app: {{ include "devops-test-helm.name" . }}
+    env: {{ .Values.env.environment }}
   ports:
-    - port: 3000
+    - port: 80
       targetPort: 3000

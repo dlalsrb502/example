@@ -3,15 +3,19 @@ kind: Deployment
 metadata:
   name: {{ include "devops-test-helm.fullname" . }}
   namespace: {{ .Values.namespace }}
+  labels:
+    env: {{ .Values.env.environment }}
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: {{ include "devops-test-helm.name" . }}
+      env: {{ .Values.env.environment }}
   template:
     metadata:
       labels:
         app: {{ include "devops-test-helm.name" . }}
+        env: {{ .Values.env.environment }}
     spec:
       containers:
         - name: {{ .Chart.Name }}
@@ -27,8 +31,6 @@ spec:
             - name: DB_HOST
               value: "{{ .Values.env.db.host }}"
             - name: DB_PORT
-              value: "{{ .Values.env.db.port | quote }}"
-            - name: DB_NAME
-              value: "{{ .Values.env.db.name }}"
+              value: "{{ .Values.env.db.port }}"
           ports:
             - containerPort: 3000

@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 import socket
+import os
 
 app = FastAPI()
 
@@ -7,7 +8,18 @@ app = FastAPI()
 async def get_host():
     try:
         hostname = socket.gethostname()
-        return {"hostname": hostname}
+
+        db_info = {
+            "user": os.getenv("DB_USER", "not set"),
+            "password": os.getenv("DB_PASSWORD", "not set"),
+            "host": os.getenv("DB_HOST", "not set"),
+            "port": os.getenv("DB_PORT", "not set"),
+        }
+
+        return {
+            "hostname": hostname,
+            "db_info": db_info
+        }
     except Exception as e:
         return {"message": str(e)}
 
