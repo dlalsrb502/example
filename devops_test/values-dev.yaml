@@ -1,0 +1,10 @@
+env:
+  dbUser: "dev_user"
+  dbPassword: "dev_password"
+
+ingress:
+  hosts:
+    - host: devops_test.autoever.dev
+      paths:
+        - path: /
+          pathType: Prefix
