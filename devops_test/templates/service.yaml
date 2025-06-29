@@ -2,14 +2,13 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ include "devops_test.fullname" . }}
-  labels:
-    {{- include "devops_test.labels" . | nindent 4 }}
+  namespace: {{ .Values.namespace }}
 spec:
   type: {{ .Values.service.type }}
+  selector:
+    app: {{ include "devops_test.name" . }}
   ports:
     - port: {{ .Values.service.port }}
-      targetPort: http
+      targetPort: {{ .Values.service.port }}
       protocol: TCP
       name: http
-  selector:
-    {{- include "devops_test.selectorLabels" . | nindent 4 }}

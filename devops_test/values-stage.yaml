@@ -1,0 +1,10 @@
+env:
+  dbUser: "stage_user"
+  dbPassword: "stage_password"
+
+ingress:
+  hosts:
+    - host: devops_test.autoever.test
+      paths:
+        - path: /
+          pathType: Prefix
